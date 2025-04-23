@@ -1,16 +1,15 @@
 import Link from "next/link";
 
-interface ExamplePageProps {
-    params: { id: string };
+interface ExampleProps {
+    params: Promise<{ id: string }>;
 }
-const Example = (props: ExamplePageProps) => {
-    const { params } = props;
+
+export default async function ExamplePage({ params }: ExampleProps) {
+    const { id } = await params;
     return (
         <div>
             <Link href="/">Home</Link>
-            <h1>Example Page with ID: {params.id}</h1>
+            <h1>Example Page with ID: {id}</h1>
         </div>
     );
-};
-
-export default Example;
+}
