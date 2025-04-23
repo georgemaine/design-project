@@ -1,15 +1,14 @@
 import Link from "next/link";
-interface Props {
-    children: React.ReactNode;
-}
 
-const Example = (props: Props) => {
-    const { children } = props;
+interface ExamplePageProps {
+    params: { id: string };
+}
+const Example = (props: ExamplePageProps) => {
+    const { params } = props;
     return (
         <div>
             <Link href="/">Home</Link>
-            <h1>Example Page</h1>
-            {children}
+            <h1>Example Page with ID: {params.id}</h1>
         </div>
     );
 };
