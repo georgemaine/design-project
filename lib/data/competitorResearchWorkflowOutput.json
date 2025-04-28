@@ -1,0 +1,192 @@
+{
+    "table": {
+        "competitors": [
+            {
+                "table": {
+                    "name": "Clarifai",
+                    "url": "https://www.clarifai.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Allen Institute for Artificial Intelligence (AI2)",
+                    "url": "https://allenai.org/"
+                }
+            },
+            {
+                "table": {
+                    "name": "DeepMind",
+                    "url": "https://www.deepmind.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Stanford Institute for Human-Centered Artificial Intelligence (HAI)",
+                    "url": "https://hai.stanford.edu/"
+                }
+            },
+            {
+                "table": {
+                    "name": "IBM Research AI",
+                    "url": "https://www.ibm.com/watson/ai-research"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Georgia Institute of Technology’s Institute for Robotics and Intelligent Machines (IRIM)",
+                    "url": "https://www.irim.gatech.edu/"
+                }
+            },
+            {
+                "table": {
+                    "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)",
+                    "url": "https://www.csail.mit.edu/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Hasso Plattner Institute (HPI)",
+                    "url": "https://hpi.de/en/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Canadian Artificial Intelligence Institute (CIFAR)",
+                    "url": "https://cifar.ca/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Future of Humanity Institute (FHI)",
+                    "url": "https://www.fhi.ox.ac.uk/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Centre for the Study of Existential Risk (CSER)",
+                    "url": "https://www.cser.ac.uk/"
+                }
+            },
+            {
+                "table": {
+                    "name": "CSET (Center for Security and Emerging Technology)",
+                    "url": "https://cset.georgetown.edu/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Robust.ai",
+                    "url": "https://www.robust.ai/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Rise",
+                    "url": "https://www.rise.ai/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Diffblue",
+                    "url": "https://www.diffblue.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Robust Intelligence",
+                    "url": "https://robust.intelligence/"
+                }
+            },
+            {
+                "table": {
+                    "name": "WhiteHat AI",
+                    "url": "https://whitehat.ai/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Jane Street",
+                    "url": "https://www.janestreet.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Semantic Scholar",
+                    "url": "https://www.semanticscholar.org/"
+                }
+            },
+            {
+                "table": {
+                    "name": "SRI International",
+                    "url": "https://www.sri.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Machine Intelligence Research Institute (MIRI)",
+                    "url": "https://intelligence.org/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The AI Now Institute",
+                    "url": "https://ainowinstitute.org/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Perimeter Institute for Theoretical Physics (PI)",
+                    "url": "https://perimeterinstitute.ca/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Hugging Face",
+                    "url": "https://huggingface.co/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Articulate Labs",
+                    "url": "https://articulatelabs.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "OATML (Oxford Applied and Theoretical Machine Learning Group)",
+                    "url": "https://oatml.cs.ox.ac.uk/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Human-Computer Interaction Group at CMU",
+                    "url": "https://www.hcii.cmu.edu/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Future Labs",
+                    "url": "https://thefuturelaboratory.com/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The NeuroLex Laboratory",
+                    "url": "https://neurolexlab.org/"
+                }
+            },
+            {
+                "table": {
+                    "name": "The Systems and Software Security Group",
+                    "url": "https://sse.cs.ucl.ac.uk/"
+                }
+            },
+            {
+                "table": {
+                    "name": "Google AI",
+                    "url": "https://ai.google/"
+                }
+            }
+        ]
+    }
+}

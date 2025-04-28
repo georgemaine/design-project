@@ -1,19 +1,5 @@
-import Link from "next/link";
-import styles from "./page.module.css";
+import HomeContent from "@/components/HomeContent";
 
 export default function Home() {
-    return (
-        <div className={styles.page}>
-            <main className={styles.main}>
-                <div className={styles.ctas}>
-                    <Link className={styles.primary} href="/examples">
-                        Examples
-                    </Link>
-                    <Link className={styles.primary} href="/examples/milele">
-                        Example
-                    </Link>
-                </div>
-            </main>
-        </div>
-    );
+    return <HomeContent />;
 }
