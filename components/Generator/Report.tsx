@@ -1,7 +1,8 @@
 import { cn, sharePage } from "@/lib/utils";
 import { Button } from "../ui/button";
-import ReportGridCard from "./ReportGridCard";
+import ReportCard from "./ReportCard";
 import { ReportContentItem } from "@/lib/data/types";
+import { AnthropicCompanyLogo } from "../ui/svgs";
 
 const ReportToolBar = () => {
   return (
@@ -37,7 +38,7 @@ const ReportGrid = (props: ReportGridProps) => {
         }}
       >
         {items.map((item, index) => (
-          <ReportGridCard item={item} key={index} tall={index === 0} />
+          <ReportCard item={item} key={index} tall={index === 0} />
         ))}
       </div>
     </div>
@@ -50,7 +51,8 @@ interface ReportCompanyLogoProps {
 const ReportCompanyLogo = (props: ReportCompanyLogoProps) => {
   const { children } = props;
   return (
-    <div className="rounded-[.5rem] border border-solid border-[rgba(0,0,0,0.1)] h-12 w-12 mb-3">
+    <div className="rounded-[.5rem] border border-solid border-[rgba(0,0,0,0.1)] h-12 w-12 mb-3 flex items-center justify-center">
+      <AnthropicCompanyLogo />
       {children}
     </div>
   );
@@ -69,11 +71,11 @@ const ReportHeader = (props: ReportHeaderProps) => {
       <h2 className="text-[1.75rem] font-bold mb-1">
         SEO audience & competitor analysis: {companyName}
       </h2>
-      <p className="text-lg leading-[25px] max-w-[660px] w-full tracking-tight">
+      {/* <p className="text-lg leading-[25px] max-w-[660px] w-full tracking-tight">
         {companyCoreValueProp}
-      </p>
+      </p> */}
     </div>
   );
 };
 
-export { ReportToolBar, ReportGrid, ReportHeader, ReportGridCard };
+export { ReportToolBar, ReportGrid, ReportHeader, ReportCard };

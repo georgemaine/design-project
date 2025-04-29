@@ -2,9 +2,9 @@
 import {
   ShimmerText,
   Spinner,
-} from "@/components/Animations/PageGeneratorAnimations";
+} from "@/components/Animations/GeneratorAnimations";
 import NavigationBar from "@/components/NavigationBar";
-import { GeneratorPreview } from "@/components/PageGenerator/GeneratorPreview";
+import { GeneratorPreview } from "@/components/Generator/GeneratorPreview";
 import { CheckBoxSvgMemo, Checkmark } from "@/components/ui/svgs";
 import { Data } from "@/lib/data";
 import { useDashOffsetSpring } from "@/lib/hooks";
@@ -24,7 +24,7 @@ const GalleryPageContent = (props: GalleryPageContentProps) => {
     <div className="w-full h-full absolute left-0 top-0 flex flex-col">
       <NavigationBar preview={true} />
       <main className="h-full overflow-hidden">
-        <GeneratorPreview backgroundColor="#FAFAF7" />
+        <GeneratorPreview backgroundColor="#f0eee6" />
         <div className="rounded-[13px] w-[270px] shadow-(--shadow-menu) flex absolute left-9 top-20 h-fit flex-col items-start p-2 bg-white">
           <h2 className="text-[21px] text-black p-2">{props.id}</h2>
           <WorkflowSteps steps={Data.companyContext().table.workflow} />

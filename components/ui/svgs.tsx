@@ -92,4 +92,19 @@ const Checkmark = ({ className }: { className?: string }) => (
     </g>
   </svg>
 );
-export { LogoWhiteSvg, LogoBlackSvg, Checkmark };
+interface AnthropicCompanyLogoProps {
+  className?: string;
+}
+
+const AnthropicCompanyLogo = (props: AnthropicCompanyLogoProps) => {
+  const { className } = props;
+  return (
+    <svg className={className} width="32" height="32" viewBox="0 0 46 32">
+      <path
+        d="M32.73 0h-6.945L38.45 32h6.945L32.73 0ZM12.665 0 0 32h7.082l2.59-6.72h13.25l2.59 6.72h7.082L19.929 0h-7.264Zm-.702 19.337 4.334-11.246 4.334 11.246h-8.668Z"
+        fill="#000000"
+      ></path>
+    </svg>
+  );
+};
+export { LogoWhiteSvg, LogoBlackSvg, Checkmark, AnthropicCompanyLogo };

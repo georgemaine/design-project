@@ -17,13 +17,13 @@ import {
 } from "lucide-react";
 import { Button } from "../ui/button";
 
-interface ReportGridCardProps {
+interface ReportCardProps {
   children?: React.ReactNode;
   item: ReportContentItem;
   tall?: boolean;
 }
 
-interface ReportGridCardHeaderProps {
+interface ReportCardHeaderProps {
   type: string;
 }
 
@@ -50,20 +50,19 @@ interface DomainCardContentProps {
   domains: Array<Domain>;
 }
 
-const ReportGridCard = (props: ReportGridCardProps) => {
-  const { children, item, tall } = props;
-  console.log(props);
+const ReportCard = (props: ReportCardProps) => {
+  const { item, tall } = props;
   return (
     <div
       className={cn(
         item.wide ? "w-[19.6875rem] l:w-[41.25rem]" : "w-[19.6875rem]",
         tall
-          ? "top-[9.375rem] sticky row-start-1 row-span-6 h-[34rem]"
+          ? "top-[9.375rem] row-start-1 row-span-6 h-[34rem] min-[715px]:sticky"
           : "h-[16.0625rem]",
         "rounded-2xl bg-white mb-[30px] grid",
       )}
     >
-      <ReportGridCardHeader type={item.type} />
+      <ReportCardHeader type={item.type} />
       {item.type === "company" && (
         <CompanyCardContent
           companyInfo={item.companyInfo as string}
@@ -99,8 +98,7 @@ const ReportGridCard = (props: ReportGridCardProps) => {
   );
 };
 
-const ReportGridCardHeader = (props: ReportGridCardHeaderProps) => {
-  console.log(props.type);
+const ReportCardHeader = (props: ReportCardHeaderProps) => {
   return (
     <div className="flex items-center gap-2 px-4 pt-4 h-fit">
       {props.type === "company" ? (
@@ -246,7 +244,7 @@ const DomainCardContent = (props: DomainCardContentProps) => {
               <p className="text-sm leading-4 m-0 w-full">
                 {domain.table.domain}{" "}
               </p>
-              <ul className="flex text-xs leading-[14px] gap-1">
+              <ul className="flex text-xs leading-[14px] gap-1 text-(--theme-color-gray1)">
                 <li>
                   <p>
                     {getFormattedValue(domain.table.appearances)} appearances
@@ -284,4 +282,4 @@ const DomainCardContent = (props: DomainCardContentProps) => {
   );
 };
 
-export default ReportGridCard;
+export default ReportCard;

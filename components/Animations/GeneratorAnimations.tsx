@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils";
-import { a, Interpolation } from "@react-spring/web";
 import styles from "./animation.module.css";
-import { useDashOffsetSpring } from "@/lib/hooks";
 
 interface ShimmerTextProps {
   children: React.ReactNode;
