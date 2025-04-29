@@ -16,6 +16,7 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "../ui/button";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface ReportCardProps {
   children?: React.ReactNode;
@@ -185,12 +186,12 @@ const PersonaCardContent = (props: PersonaCardProps) => {
 const JobsToBeDoneCardContent = (props: JobsToBeDoneCardContentProps) => {
   const { jobs } = props;
   return (
-    <div className="overflow-auto ">
-      <ul className="p-4">
+    <ScrollArea className="px-2 pt-2 h-[221px]">
+      <ul>
         {jobs.map((job, index) => (
           <li
             key={index}
-            className="pb-2 flex flex-col justify-between items-center text-center"
+            className="py-4 flex flex-col justify-between items-center text-center border-b mx-4"
           >
             <p className="text-sm leading-4 my-1 grow">"{job.text}"</p>
             <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
@@ -199,7 +200,7 @@ const JobsToBeDoneCardContent = (props: JobsToBeDoneCardContentProps) => {
           </li>
         ))}
       </ul>
-    </div>
+    </ScrollArea>
   );
 };
 
@@ -207,43 +208,51 @@ const TopPagesCardContent = (props: TopPagesCardContentProps) => {
   const { pages } = props;
   console.log({ pages, length: pages.length });
   return (
-    <div className="overflow-y-auto">
-      <ul className="p-4">
+    <ScrollArea className="px-2 pt-2 h-[221px]">
+      <ul>
         {pages.map((page, index) => (
-          <li key={index} className="pb-2 flex items-center gap-[10px]">
-            <div className="h-10 w-10 bg-gray-300 rounded-[.5rem] flex items-center justify-center">
+          <li
+            key={index}
+            className="pb-2 flex items-center gap-[10px] hover:bg-[#F0EFEA] rounded-sm p-2 hover:cursor-pointer"
+          >
+            <div className="min-h-10 min-w-10 bg-gray-300 rounded-[.5rem] flex items-center justify-center">
               {/* Maybe show initials or icon here if no background */}
             </div>
-            <div className="grow">
-              <p className="text-sm leading-4 my-1 w-full font-medium">
+            <div className="flex flex-col grow gap-1">
+              <p className="text-sm leading-4 font-medium">
                 {page.table.title}
               </p>
-              <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal line-clamp-1 w-80">
+              <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal line-clamp-1 max-w-44">
                 {page.table.url}
               </p>
-            </div>
-            <div className="h-4 w-4 bg-black text-white rounded-2xl flex items-center justify-center text-xs">
-              {page.table.relevanceScore}
             </div>
           </li>
         ))}
       </ul>
-    </div>
+    </ScrollArea>
   );
 };
 
 const DomainCardContent = (props: DomainCardContentProps) => {
   const { domains } = props;
-  console.log({ domains });
+
   return (
-    <div className="overflow-y-auto">
-      <ul className="p-4">
+    <ScrollArea className="px-2 pt-2 h-[221px]">
+      <ul>
         {domains.map((domain, index) => (
-          <li key={index} className="flex items-center pb-2">
+          <li
+            key={index}
+            className="flex items-center pb-2 hover:bg-[#F0EFEA] p-2 rounded-sm"
+          >
             <div className="flex flex-col grow">
-              <p className="text-sm leading-4 m-0 w-full">
-                {domain.table.domain}{" "}
-              </p>
+              <a
+                className="text-sm leading-4 m-0 w-full font-medium"
+                href={`https://${domain.table.domain}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {domain.table.domain}
+              </a>
               <ul className="flex text-xs leading-[14px] gap-1 text-(--theme-color-gray1)">
                 <li>
                   <p>
@@ -272,13 +281,17 @@ const DomainCardContent = (props: DomainCardContentProps) => {
                 )}
               </ul>
             </div>
-            <Button variant="ghost" className="p-0 h-7">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="p-0 h-7 hover:cursor-pointer hover:bg-[#F0EFEA]"
+            >
               <InfoIcon />
             </Button>
           </li>
         ))}
       </ul>
-    </div>
+    </ScrollArea>
   );
 };
 
