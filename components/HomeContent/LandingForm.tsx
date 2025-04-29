@@ -38,7 +38,7 @@ export function LandingForm(props: LandingFormProps) {
           <Input
             type="text"
             name="query"
-            placeholder="Enter company name"
+            placeholder="Enter company website"
             className="bg-white h-16 w-[full border-px border-(--theme-color-fillQuaternary) !text-lg pl-5 pr-5 shadow-[0_11px_34px_rgba(0,0,0,0.07)] focus:ring-2 focus:ring-[--theme-color-appTint] rounded-[14px]"
           />
           <div className="absolute right-2">
