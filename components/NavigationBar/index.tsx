@@ -25,7 +25,7 @@ const NavigationBar = (props: NavigationBarProps) => {
     <NavigationMenu
       className={cn(
         className,
-        "sticky top-0 px-4 h-11 w-full min-w-full justify-start",
+        "sticky top-0 px-4 min-h-11 w-full min-w-full justify-start",
       )}
     >
       <Link href="/">
