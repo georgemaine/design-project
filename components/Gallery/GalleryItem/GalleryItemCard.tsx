@@ -1,8 +1,8 @@
-import CursorTarget from "@/components/Animations/CursorTarget";
+import HoverTarget from "@/components/Animations/HoverTarget";
 import { a } from "@react-spring/web";
 import Link from "next/link";
 
-interface GalleryItemCardProps {
+export interface GalleryItemCardProps {
   title: string;
   description: string;
   imageSrc: string;
@@ -14,7 +14,7 @@ interface GalleryItemCardProps {
 const GalleryItemCard = (props: GalleryItemCardProps) => {
   const { bgColor, alt, imageSrc, title, description, link } = props;
   return (
-    <CursorTarget enabled={true}>
+    <HoverTarget enabled={true}>
       {(v) => (
         <a.div
           className="rounded-[10px] overflow-hidden shadow-card relative before:content-[''] before:absolute before:inset-0 before:rounded-[30px] before:border before:border-[rgba(128,128,128,.1)]"
@@ -37,7 +37,7 @@ const GalleryItemCard = (props: GalleryItemCardProps) => {
           </Link>
         </a.div>
       )}
-    </CursorTarget>
+    </HoverTarget>
   );
 };
 

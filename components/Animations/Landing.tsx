@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./animation.module.css";
 import clsx from "clsx";
 
+// FIXME: Get rid of this
 const LandingBackgroundAnimation = () => {
   return (
     <div
@@ -16,16 +17,16 @@ const LandingBackgroundAnimation = () => {
         pointerEvents: "none",
       }}
     >
-      <div className={clsx(styles.line, styles.line0)} />
-      <div className={clsx(styles.line, styles.line1)} />
-      <div className={clsx(styles.line, styles.line2)} />
-      <div className={clsx(styles.line, styles.line3)} />
-      <div className={clsx(styles.line, styles.line4)} />
-      <div className={clsx(styles.line, styles.line5)} />
-      <div className={clsx(styles.line, styles.line6)} />
-      <div className={clsx(styles.line, styles.line7)} />
-      <div className={clsx(styles.line, styles.line8)} />
-      <div className={clsx(styles.line, styles.line9)} />
+      <div className={clsx(styles["line"], styles["line0"])} />
+      <div className={clsx(styles["line"], styles["line1"])} />
+      <div className={clsx(styles["line"], styles["line2"])} />
+      <div className={clsx(styles["line"], styles["line3"])} />
+      <div className={clsx(styles["line"], styles["line4"])} />
+      <div className={clsx(styles["line"], styles["line5"])} />
+      <div className={clsx(styles["line"], styles["line6"])} />
+      <div className={clsx(styles["line"], styles["line7"])} />
+      <div className={clsx(styles["line"], styles["line8"])} />
+      <div className={clsx(styles["line"], styles["line9"])} />
     </div>
   );
 };

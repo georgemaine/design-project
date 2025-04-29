@@ -313,7 +313,7 @@ body {
     infinite;
   --animate-inputShimmerTransforms: rotateAndMove 4s linear infinite;
   --breakpoint-m: 47.5rem;
-  --breakpoint-l: 66.25rem;
+  --breakpoint-l: 86.3125rem;
 }
 
 @layer base {

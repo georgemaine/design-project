@@ -1,28 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import {
-  IState,
-  ActionReducerMap,
-  initialState,
-  actionReducerMap,
-  ActionReducer,
-} from "./reducers";
-import { actionReducerMatcher } from "./actionReducerMatcher";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-export function createReducer(
-  callback: () => IState,
-  reducers: ActionReducerMap,
-) {
-  return function (state = callback(), reducer: ActionReducer) {
-    return actionReducerMatcher(reducers, state, reducer);
-  };
-}
-
-export const reducer = createReducer(() => initialState, actionReducerMap);
 
 export function getIsTouchDevice() {
   if (typeof window === "undefined") return false;
@@ -49,20 +30,6 @@ export function getGalleryItemPath(companyName: string) {
 
 export function computeDashOffset(v: number, enabled: boolean): number {
   return enabled ? 16 * (1 - v) : 16 * (1 + v);
-}
-
-export async function sharePage() {
-  try {
-    await navigator.share({
-      title: "Report Page",
-      url: window.location.href,
-    });
-  } catch (e) {
-    if (!(e instanceof Error))
-      return void console.error("Native sharing hit an unknown error:", e);
-    if ("AbortError" === e.name) return;
-    console.error("Failed to open share sheet:", e);
-  }
 }
 
 export function getFormattedValue(v: number) {

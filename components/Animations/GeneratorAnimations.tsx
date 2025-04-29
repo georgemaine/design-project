@@ -27,7 +27,7 @@ export function ShimmerText(props: ShimmerTextProps) {
     </div>
   );
 }
-
+// FIXME: refactor from modules to tailwind
 export const Spinner = (props: SpinnerProps) => {
   const { size } = props;
   return (

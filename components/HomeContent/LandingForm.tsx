@@ -12,7 +12,6 @@ interface LandingFormProps {
 
 export function LandingForm(props: LandingFormProps) {
   const { spring } = props;
-  const dispatch = useAppDispatch();
 
   function generatePage(formData: FormData) {
     const website = formData.get("query");
@@ -21,8 +20,6 @@ export function LandingForm(props: LandingFormProps) {
 
     if (validUrl) {
       // window.location.href = query as string; // handle trim logic
-      window.location.href = getGalleryItemPath(website as string);
-    } else {
       window.location.href = getGalleryItemPath(website as string);
     }
   }

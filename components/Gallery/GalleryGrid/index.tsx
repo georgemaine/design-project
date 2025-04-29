@@ -3,7 +3,16 @@ import GalleryItemCard from "../GalleryItem/GalleryItemCard";
 import { useMemo } from "react";
 import Link from "next/link";
 
-const items = [
+interface GalleryItemProps {
+  title: string;
+  description: string;
+  imageSrc: string;
+  alt: string;
+  link: string;
+  bgColor: string;
+}
+// FIXME: Move to data
+const items: GalleryItemProps[] = [
   {
     title: "Deepgram",
     description: "companyWebsite",
@@ -47,7 +56,7 @@ const items = [
 ];
 
 const GalleryGrid = () => {
-  const GalleryGridContent = useMemo(() => {
+  const GalleryGridItems = useMemo(() => {
     return items.map((item, index) => (
       <GalleryItemCard
         key={index}
@@ -66,10 +75,10 @@ const GalleryGrid = () => {
       <div
         className="max-w-[1005px] w-[calc(100%-40px)] m-12 px-5 pb-12 flex flex-col ml-auto mr-auto"
         style={{
-          boxSizing: "initial",
+          boxSizing: "initial", // FIXME: random bug with padding/margin/tailwind
         }}
       >
-        <div className="grid justify-center py-4 gap-[1.875rem] grid-cols-[repeat(1,_19.6875rem)  min-[44.6875rem]:grid-cols-[repeat(2,_19.6875rem)] l:grid-cols-[repeat(3,_19.6875rem)]">
+        <div className="grid justify-center py-4 gap-[1.875rem] grid-cols-[repeat(1,_19.6875rem)  min-[62.8125rem]:grid-cols-[repeat(2,_19.6875rem)] l:grid-cols-[repeat(3,_19.6875rem)]">
           <div className="col-span-full">
             <Link
               href="/examples"
@@ -85,11 +94,11 @@ const GalleryGrid = () => {
             </Link>
             <p>See what Discovery has done for other clients and companies.</p>
           </div>
-          {GalleryGridContent}
+          {GalleryGridItems}
         </div>
       </div>
     </div>
   );
 };
 
-export { GalleryGrid as GalleryContent };
+export { GalleryGrid };

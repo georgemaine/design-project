@@ -28,10 +28,14 @@ const GalleryPageContent = (props: GalleryPageContentProps) => {
   }, [isGenerating, dispatch]);
   return (
     <div className="w-full h-full absolute left-0 top-0 flex flex-col">
-      <NavigationBar preview={true} />
-      <main className="h-full overflow-hidden">
-        <GeneratorPreview backgroundColor="#f0eee6" />
-        {isGenerating && <GeneratorWorkflow id={props.id} />}
+      <NavigationBar preview={false} />
+      <main className="absolute h-full w-full left-0 top-0 overflow-hidden">
+        <div className="w-full h-full flex flex-row flex-1">
+          <div className="min-w-[305px] flex justify-center">
+            {isGenerating && <GeneratorWorkflow id={props.id} />}
+          </div>
+          <GeneratorPreview backgroundColor="#f0eee6" />
+        </div>
       </main>
     </div>
   );

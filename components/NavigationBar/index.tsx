@@ -5,6 +5,11 @@ import { LogoBlackSvg } from "../ui/svgs";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
+interface NavigationBarProps {
+  className?: string;
+  preview: boolean;
+}
+
 const LinkText = () => {
   return (
     <span className="flex items-center text-[21px] gap-[6px] font-medium">
@@ -13,11 +18,6 @@ const LinkText = () => {
     </span>
   );
 };
-
-interface NavigationBarProps {
-  className?: string;
-  preview: boolean;
-}
 
 const NavigationBar = (props: NavigationBarProps) => {
   const { className, preview } = props;
@@ -33,7 +33,7 @@ const NavigationBar = (props: NavigationBarProps) => {
       </Link>
       <div className="grow shrink-0" />
       {preview && (
-        <Button className="min-w-[5.625rem] h-8 rounded-4xl shadow-[0_12px_24px_rgba(0_0_0_/_17%)] bg-(--theme-color-appTint)">
+        <Button className="min-w-[5.625rem] h-7 rounded-4xl shadow-[0_12px_24px_rgba(0_0_0_/_17%)] bg-(--theme-color-appTint)">
           Publish
         </Button>
       )}

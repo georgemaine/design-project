@@ -1,30 +1,32 @@
-import { cn, sharePage } from "@/lib/utils";
-import { Button } from "../ui/button";
 import ReportCard from "./ReportCard";
 import { ReportContentItem } from "@/lib/data/types";
 import { AnthropicCompanyLogo } from "../ui/svgs";
+import { useTypewriter } from "./useTypewriter";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/lib/store";
+
+interface ReportGridProps {
+  items: Array<ReportContentItem>;
+}
+interface ReportCompanyLogoProps {
+  children?: React.ReactNode;
+}
+interface ReportHeaderProps {
+  companyName: string;
+  companyCoreValueProp: string;
+}
 
 const ReportToolBar = () => {
   return (
-    <header className="top-0 mb-6 z-[1] sticky flex  justify-center">
+    <header className="top-0 z-[1] sticky flex justify-center">
       <div className="max-w-[1005px] ml-5 mr-5 pb-6 pt-6 w-full grid grid-cols-1 grid-rows-1 gap-0 [grid-auto-flow:row] items-center">
         <div className="w-full gap-x-[10px] gap-y-[0.625rem] flex items-center flex-row">
           <div className="grow shrink-0" />
-          <Button
-            className="min-w-[5.625rem] h-8 rounded-4xl"
-            onClick={sharePage}
-          >
-            Share
-          </Button>
         </div>
       </div>
     </header>
   );
 };
-
-interface ReportGridProps {
-  items: Array<ReportContentItem>;
-}
 
 const ReportGrid = (props: ReportGridProps) => {
   const { items } = props;
@@ -45,9 +47,6 @@ const ReportGrid = (props: ReportGridProps) => {
   );
 };
 
-interface ReportCompanyLogoProps {
-  children?: React.ReactNode;
-}
 const ReportCompanyLogo = (props: ReportCompanyLogoProps) => {
   const { children } = props;
   return (
@@ -58,22 +57,25 @@ const ReportCompanyLogo = (props: ReportCompanyLogoProps) => {
   );
 };
 
-interface ReportHeaderProps {
-  companyName: string;
-  companyCoreValueProp: string;
-}
-
 const ReportHeader = (props: ReportHeaderProps) => {
-  const { companyName, companyCoreValueProp } = props;
+  const { companyName } = props;
+  const dispatch = useAppDispatch();
+  const { element, isDone } = useTypewriter(
+    `SEO audience & competitor analysis: ${companyName}`,
+  );
+
+  useEffect(() => {
+    if (isDone) {
+      console.log("Header.OnGenerateEnd");
+      dispatch({
+        type: "Header.OnGenerateEnd",
+      });
+    }
+  }, [isDone]);
   return (
     <div className="max-w-[1005px] w-[calc(100%-40px)] mb-5 mx-auto">
       <ReportCompanyLogo />
-      <h2 className="text-[1.75rem] font-bold mb-1">
-        SEO audience & competitor analysis: {companyName}
-      </h2>
-      {/* <p className="text-lg leading-[25px] max-w-[660px] w-full tracking-tight">
-        {companyCoreValueProp}
-      </p> */}
+      <h2 className="text-[1.75rem] font-bold mb-1 min-h-9">{element}</h2>
     </div>
   );
 };

@@ -25,8 +25,8 @@ const GeneratorWorkflow = (props: GeneratorWorkflowProps) => {
     shallowEqual,
   );
   return (
-    <div className="rounded-[13px] w-[270px] shadow-(--shadow-menu) flex absolute left-9 top-20 h-fit flex-col items-start p-2 bg-white">
-      <h2 className="text-[21px] text-black p-2">{props.id}</h2>
+    <div className="rounded-[13px] w-[270px] flex h-fit flex-col items-start pt-[64px]">
+      <h2 className="text-[21px] text-black p-2">{"Workflow"}</h2>
       {generatorWorkflowIndex >= 0 && (
         <GeneratorWorkflowStep
           index={1}
@@ -75,7 +75,7 @@ const GeneratorWorkflowStep = (props: GeneratorWorkflowStepProps) => {
 
     const timeout = setTimeout(() => {
       setActiveStepIndex((prev) => prev + 1);
-    }, steps[activeStepIndex].duration);
+    }, steps[activeStepIndex]!.duration);
 
     return () => clearTimeout(timeout);
   }, [activeStepIndex, steps]);

@@ -2,17 +2,17 @@ import { cn, getIsTouchDevice } from "@/lib/utils";
 import { SpringValue, useSpring } from "@react-spring/web";
 import React, { useRef, useState, useCallback, useEffect } from "react";
 
-interface CursorTargetProps {
+interface HoverTargetProps {
   enabled?: boolean | undefined;
   inline?: boolean | undefined;
   className?: string | undefined;
   children: (hover: SpringValue<number>) => React.ReactNode;
 }
 
-const CursorTarget = (props: CursorTargetProps) => {
+const HoverTarget = (props: HoverTargetProps) => {
   const { enabled, className, children } = props;
   const isTouchDevice = getIsTouchDevice();
-  const cursorTargetRef = useRef(null);
+  const targetRef = useRef(null);
   const [isHovering, setHover] = useState(false);
   const handleMouseEnter = useCallback(() => {
     if (enabled) {
@@ -35,6 +35,7 @@ const CursorTarget = (props: CursorTargetProps) => {
   const handleTouchEnd = useCallback(() => {
     return setHover(false);
   }, []);
+  // FIXME: Move configs to constants
   const scaleSpring = useSpring({
     hover: isHovering ? 1 : 0,
     config: {
@@ -51,11 +52,11 @@ const CursorTarget = (props: CursorTargetProps) => {
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      ref={cursorTargetRef}
+      ref={targetRef}
       data-clickable={true}
     >
       {!!children && children(scaleSpring.hover)}
     </span>
   );
 };
-export default React.memo(CursorTarget);
+export default React.memo(HoverTarget);

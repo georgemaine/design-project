@@ -17,6 +17,11 @@ import {
 } from "lucide-react";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
+import { useAppSelector } from "@/lib/store";
+import { shallowEqual } from "react-redux";
+import { Skeleton } from "@radix-ui/themes";
+import { useTypewriter } from "./useTypewriter";
+import { useState, useEffect, useCallback } from "react";
 
 interface ReportCardProps {
   children?: React.ReactNode;
@@ -133,72 +138,205 @@ const ReportCardHeader = (props: ReportCardHeaderProps) => {
 
 const CompanyCardContent = (props: CompanyCardContentProps) => {
   const { companyInfo, headquarters, industry, website } = props;
+  const isHeaderGenerated = useAppSelector(
+    (state) => state.header.isGenerated,
+    shallowEqual,
+  );
+  const {
+    element: animatedCompanyInfoText,
+    isDone: isCompanyInfoAnimationDone,
+  } = useTypewriter(companyInfo, { animate: isHeaderGenerated });
+
+  const {
+    element: animatedElevatorPitchText,
+    isDone: isElevatorPitchAnimationDone,
+  } = useTypewriter(Data.companyContext().table.elevatorPitch, {
+    animate: isCompanyInfoAnimationDone,
+  });
+
+  const { element: animatedWebsiteText, isDone: isWebsiteAnimationDone } =
+    useTypewriter(website, {
+      animate: isElevatorPitchAnimationDone,
+    });
+
+  const {
+    element: animatedHeadquartersText,
+    isDone: isHeadquartersAnimationDone,
+  } = useTypewriter(headquarters, {
+    animate: isWebsiteAnimationDone,
+  });
+
+  const { element: animatedIndustryText, isDone: isIndustryAnimationDone } =
+    useTypewriter(industry, {
+      animate: isHeadquartersAnimationDone,
+    });
+
   return (
     <ul className="p-4">
-      <li className="pb-2">
+      <li className="pb-6">
         <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
-          About
+          <Skeleton loading={!isHeaderGenerated}>About</Skeleton>
         </p>
-        <p className="text-sm leading-4 mt-1 tracking-normal">{companyInfo}</p>
+        <p className="text-sm leading-4 mt-1 tracking-normal">
+          {!isHeaderGenerated ? (
+            <Skeleton loading={!isHeaderGenerated}>"placeholder"</Skeleton>
+          ) : (
+            animatedCompanyInfoText
+          )}
+        </p>
+        <p className="text-sm leading-4 mt-4 tracking-normal">
+          {isCompanyInfoAnimationDone && animatedElevatorPitchText}
+        </p>
         <a
           href={website}
           rel="nofollow"
           target="_blank"
           className="text-xs text-(--theme-color-gray1) leading-[14px]"
         >
-          {website}
+          {isCompanyInfoAnimationDone && animatedWebsiteText}
         </a>
       </li>
-      <li className="pb-2">
+      <li className="pb-6">
         <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
-          Headquarters
+          {!isWebsiteAnimationDone ? (
+            <Skeleton loading={true}>"placeholder"</Skeleton>
+          ) : (
+            "Headquarters"
+          )}
         </p>
-        <p className="text-sm leading-4 my-1">{headquarters}</p>
+        <p className="text-sm leading-4 my-1">
+          {isWebsiteAnimationDone && animatedHeadquartersText}
+        </p>
       </li>
-      <li className="pb-2">
+      <li className="pb-6">
         <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
-          Industry
+          {!isHeadquartersAnimationDone ? (
+            <Skeleton loading={true}>"Industry"</Skeleton>
+          ) : (
+            "Industry"
+          )}
         </p>
-        <p className="text-sm leading-4 my-1">{industry}</p>
+        <p className="text-sm leading-4 my-1">
+          {isHeadquartersAnimationDone && animatedIndustryText}
+        </p>
       </li>
     </ul>
   );
 };
 
 const PersonaCardContent = (props: PersonaCardProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <ul className="p-4">
-      {props.personas.map((persona, index) => (
-        <li key={index} className="my-2 flex justify-between items-center">
-          <div className="h-4 w-4 bg-black text-white rounded-2xl flex items-center justify-center text-xs">
-            {index + 1}
-          </div>
-          <p className="text-sm leading-4 my-1 grow ml-2">{persona.type}</p>
-          <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
-            {persona.queries} queries
-          </p>
-        </li>
-      ))}
+      {props.personas.map((persona, index) => {
+        const shouldAnimate = index === activeIndex;
+        const { element: animatedText, isDone } = useTypewriter(persona.type, {
+          animate: shouldAnimate,
+        });
+
+        // When the animation finishes, advance to next
+        useEffect(() => {
+          if (
+            isDone &&
+            shouldAnimate &&
+            activeIndex < props.personas.length - 1
+          ) {
+            setActiveIndex((i) => i + 1);
+          }
+        }, [isDone, shouldAnimate]);
+        return (
+          <li key={index} className="my-2 flex justify-between items-center">
+            <div className="h-4 w-4 bg-black text-white rounded-2xl flex items-center justify-center text-xs">
+              {index + 1}
+            </div>
+            <p className="text-sm leading-4 my-1 grow ml-2">{animatedText}</p>
+            <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
+              {persona.queries} queries
+            </p>
+          </li>
+        );
+      })}
     </ul>
   );
 };
 
 const JobsToBeDoneCardContent = (props: JobsToBeDoneCardContentProps) => {
+  // FIXME
   const { jobs } = props;
+  const isCompanyContextWorkflowRunning = useAppSelector(
+    (state) => state.generate.workflowIndex === 0,
+    shallowEqual,
+  );
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [doneFlags, setDoneFlags] = useState(() =>
+    Array(jobs.length).fill(false),
+  );
+  const handleDone = useCallback(
+    (index: number) => {
+      setDoneFlags((prev) => {
+        if (prev[index]) return prev; // already marked
+        const updated = [...prev];
+        updated[index] = true;
+        return updated;
+      });
+    },
+    [setDoneFlags],
+  );
+
+  useEffect(() => {
+    if (
+      doneFlags[currentIndex] &&
+      !isCompanyContextWorkflowRunning &&
+      currentIndex < jobs.length - 1
+    ) {
+      setCurrentIndex((i) => i + 1);
+    }
+  }, [doneFlags, currentIndex, isCompanyContextWorkflowRunning, jobs.length]);
+
   return (
     <ScrollArea className="px-2 pt-2 h-[221px]">
       <ul>
-        {jobs.map((job, index) => (
-          <li
-            key={index}
-            className="py-4 flex flex-col justify-between items-center text-center border-b mx-4"
-          >
-            <p className="text-sm leading-4 my-1 grow">"{job.text}"</p>
-            <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
-              {job.persona}
-            </p>
-          </li>
-        ))}
+        {jobs.map((job, index) => {
+          const shouldAnimate =
+            index === currentIndex && !isCompanyContextWorkflowRunning;
+          const { element: animatedText, isDone } = useTypewriter(job.text, {
+            animate: shouldAnimate,
+          });
+          const { element: animatedPersonaText } = useTypewriter(job.persona, {
+            animate: shouldAnimate,
+          });
+
+          // notify parent when animation finishes
+          useEffect(() => {
+            if (shouldAnimate && isDone) {
+              handleDone(index);
+            }
+          }, [isDone, shouldAnimate, index, handleDone]);
+
+          return (
+            <li
+              key={index}
+              className="py-4 flex flex-col justify-between items-center text-center border-b mx-4"
+            >
+              <p className="text-sm leading-4 my-1 grow">
+                <Skeleton
+                  loading={isCompanyContextWorkflowRunning}
+                  className="opacity-50"
+                >
+                  "{animatedText}"
+                </Skeleton>
+              </p>
+              <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal">
+                <Skeleton
+                  loading={isCompanyContextWorkflowRunning}
+                  className="opacity-50"
+                >
+                  {animatedPersonaText}
+                </Skeleton>
+              </p>
+            </li>
+          );
+        })}
       </ul>
     </ScrollArea>
   );
@@ -206,7 +344,10 @@ const JobsToBeDoneCardContent = (props: JobsToBeDoneCardContentProps) => {
 
 const TopPagesCardContent = (props: TopPagesCardContentProps) => {
   const { pages } = props;
-  console.log({ pages, length: pages.length });
+  const workflowIndex = useAppSelector(
+    (state) => state.generate.workflowIndex,
+    shallowEqual,
+  );
   return (
     <ScrollArea className="px-2 pt-2 h-[221px]">
       <ul>
@@ -215,15 +356,21 @@ const TopPagesCardContent = (props: TopPagesCardContentProps) => {
             key={index}
             className="pb-2 flex items-center gap-[10px] hover:bg-[#F0EFEA] rounded-sm p-2 hover:cursor-pointer"
           >
-            <div className="min-h-10 min-w-10 bg-gray-300 rounded-[.5rem] flex items-center justify-center">
-              {/* Maybe show initials or icon here if no background */}
-            </div>
+            <Skeleton loading={workflowIndex !== 3} className="opacity-50">
+              <div className="min-h-10 min-w-10 bg-gray-300 rounded-[.5rem] flex items-center justify-center">
+                {/* Maybe show initials or icon here if no background */}
+              </div>
+            </Skeleton>
             <div className="flex flex-col grow gap-1">
               <p className="text-sm leading-4 font-medium">
-                {page.table.title}
+                <Skeleton loading={workflowIndex !== 3} className="opacity-50">
+                  {page.table.title}
+                </Skeleton>
               </p>
               <p className="text-xs text-(--theme-color-gray1) leading-[14px] tracking-normal line-clamp-1 max-w-44">
-                {page.table.url}
+                <Skeleton loading={workflowIndex !== 3} className="opacity-50">
+                  {page.table.url}
+                </Skeleton>
               </p>
             </div>
           </li>
@@ -235,7 +382,10 @@ const TopPagesCardContent = (props: TopPagesCardContentProps) => {
 
 const DomainCardContent = (props: DomainCardContentProps) => {
   const { domains } = props;
-
+  const isCompetitorResearchWorkflowRunning = useAppSelector(
+    (state) => state.generate.workflowIndex < 2,
+    shallowEqual,
+  );
   return (
     <ScrollArea className="px-2 pt-2 h-[221px]">
       <ul>
@@ -251,42 +401,69 @@ const DomainCardContent = (props: DomainCardContentProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {domain.table.domain}
+                <Skeleton
+                  loading={isCompetitorResearchWorkflowRunning}
+                  className="opacity-50"
+                >
+                  {domain.table.domain}
+                </Skeleton>
               </a>
               <ul className="flex text-xs leading-[14px] gap-1 text-(--theme-color-gray1)">
                 <li>
                   <p>
-                    {getFormattedValue(domain.table.appearances)} appearances
+                    <Skeleton
+                      loading={isCompetitorResearchWorkflowRunning}
+                      className="opacity-50"
+                    >
+                      {" "}
+                      {getFormattedValue(domain.table.appearances)} appearances
+                    </Skeleton>
                   </p>
                 </li>
                 {domain.table.seoMetrics && (
                   <li>
                     <p>
-                      {getFormattedValue(
-                        domain.table.seoMetrics.table.estimatedMonthlyTraffic,
-                      )}{" "}
-                      monthly traffic
+                      <Skeleton
+                        loading={isCompetitorResearchWorkflowRunning}
+                        className="opacity-50"
+                      >
+                        {getFormattedValue(
+                          domain.table.seoMetrics.table.estimatedMonthlyTraffic,
+                        )}{" "}
+                        monthly traffic
+                      </Skeleton>
                     </p>
                   </li>
                 )}
                 {domain.table.seoMetrics && (
                   <li>
                     <p>
-                      {getFormattedValue(
-                        domain.table.seoMetrics.table.serpCount,
-                      )}{" "}
-                      serp
+                      <Skeleton
+                        loading={isCompetitorResearchWorkflowRunning}
+                        className="opacity-50"
+                      >
+                        {getFormattedValue(
+                          domain.table.seoMetrics.table.serpCount,
+                        )}{" "}
+                        serp
+                      </Skeleton>
                     </p>
                   </li>
                 )}
               </ul>
             </div>
+
             <Button
               variant="ghost"
               size="icon"
               className="p-0 h-7 hover:cursor-pointer hover:bg-[#F0EFEA]"
             >
-              <InfoIcon />
+              <Skeleton
+                loading={isCompetitorResearchWorkflowRunning}
+                className="opacity-50"
+              >
+                <InfoIcon />
+              </Skeleton>
             </Button>
           </li>
         ))}

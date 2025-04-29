@@ -1,23 +1,30 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch, TypedUseSelectorHook, useSelector, Provider } from "react-redux";
-import { reducer } from "./utils";
+import {
+  useDispatch,
+  TypedUseSelectorHook,
+  useSelector,
+  Provider,
+} from "react-redux";
+import { appReducer } from "./reducers";
 
 interface StoreProviderProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const appStore = configureStore({
-    reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  reducer: appReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = (selector, equalityFn) =>
-    useSelector(selector, equalityFn);
+export const useAppSelector: TypedUseSelectorHook<RootState> = (
+  selector,
+  equalityFn,
+) => useSelector(selector, equalityFn);
 
 const StoreProvider = (props: StoreProviderProps) => {
-    const { children } = props;
-    return <Provider store={appStore}>{children}</Provider>;
+  const { children } = props;
+  return <Provider store={appStore}>{children}</Provider>;
 };
 
 export { appStore, StoreProvider };

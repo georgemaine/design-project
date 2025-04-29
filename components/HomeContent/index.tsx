@@ -1,8 +1,8 @@
 "use client";
 import { LogoWhiteSvg } from "../ui/svgs";
-import styles from "./home.module.css";
-import { GalleryContent } from "../Gallery/GalleryContent";
-import CursorTarget from "../Animations/CursorTarget";
+import styles from "./home.module.css"; // FIXME: refactor CSS modules
+import { GalleryGrid } from "../Gallery/GalleryGrid";
+import HoverTarget from "../Animations/HoverTarget";
 import { LandingForm } from "./LandingForm";
 import NavigationBar from "../NavigationBar";
 
@@ -20,15 +20,15 @@ const HomeContent = () => {
             Use AI to uncover domain opportunities and analyze top pages with
             SEO insights
           </p>
-          <CursorTarget enabled={true} className={"mt-10 w-full"}>
+          <HoverTarget enabled={true} className={"mt-10 w-full"}>
             {(spring) => <LandingForm spring={spring} />}
-          </CursorTarget>
+          </HoverTarget>
           <p className="text-xs uppercase text-neutral-400 tracking-widest mt-10">
             by GrowthX
           </p>
         </div>
 
-        <GalleryContent />
+        <GalleryGrid />
         {/* <LandingBackgroundAnimationMemo /> */}
       </main>
     </>

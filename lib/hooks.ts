@@ -53,6 +53,10 @@ export function useDashOffsetSpring(enabled: boolean) {
         x: xRef.current,
       });
     }
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
   }, [enabled, api, previousEnabled]);
   return props.x.to((v) => computeDashOffset(v, reverse.current));
 }
