@@ -1,3 +1,58 @@
+export interface TopPage {
+  table: {
+    url: string;
+    title: string;
+    relevanceScore: number;
+    reasoning: string;
+    context: string;
+    query: string;
+    domain: string;
+    metrics: {
+      table: {
+        rankingKeywords: number;
+        estimatedTraffic: number;
+        keywordInsights: {
+          table: {
+            totalKeywords: number;
+            topKeywords: Array<{
+              table: {
+                keyword: string;
+                searchVolume: number;
+                position: number;
+                difficulty: number;
+                monthlyTrend: {
+                  table: {
+                    percentage: number;
+                    direction: string;
+                  };
+                };
+              };
+            }>;
+            rankingDistribution: {
+              table: {
+                top3: number;
+                top10: number;
+                top20: number;
+                top50: number;
+                top100: number;
+              };
+            };
+          };
+        };
+        keywordSuggestions: Array<{
+          table: {
+            keyword: string;
+            searchVolume: number;
+            difficulty: number;
+            relevanceScore: number;
+            reasoning: string;
+          };
+        }>;
+      };
+    };
+  };
+}
+
 export interface CompanyContext {
   table: {
     companyName: string;
@@ -31,6 +86,7 @@ export interface CompanyContext {
       workflowStepName: string;
       duration: number;
     }>;
+    workflowName: string;
   };
 }
 
@@ -42,6 +98,11 @@ export interface CompetitorResearch {
         url: string;
       };
     }>;
+    workflow: Array<{
+      workflowStepName: string;
+      duration: number;
+    }>;
+    workflowName: string;
   };
 }
 
@@ -119,60 +180,10 @@ export interface SEOStrategyAudienceAndCompetitorsAnalysis {
     };
     strategicInsights: string;
     reportContent: Array<ReportContentItem>;
-  };
-}
-
-export interface TopPage {
-  table: {
-    url: string;
-    title: string;
-    relevanceScore: number;
-    reasoning: string;
-    context: string;
-    query: string;
-    domain: string;
-    metrics: {
-      table: {
-        rankingKeywords: number;
-        estimatedTraffic: number;
-        keywordInsights: {
-          table: {
-            totalKeywords: number;
-            topKeywords: Array<{
-              table: {
-                keyword: string;
-                searchVolume: number;
-                position: number;
-                difficulty: number;
-                monthlyTrend: {
-                  table: {
-                    percentage: number;
-                    direction: string;
-                  };
-                };
-              };
-            }>;
-            rankingDistribution: {
-              table: {
-                top3: number;
-                top10: number;
-                top20: number;
-                top50: number;
-                top100: number;
-              };
-            };
-          };
-        };
-        keywordSuggestions: Array<{
-          table: {
-            keyword: string;
-            searchVolume: number;
-            difficulty: number;
-            relevanceScore: number;
-            reasoning: string;
-          };
-        }>;
-      };
-    };
+    workflow: Array<{
+      workflowStepName: string;
+      duration: number;
+    }>;
+    workflowName: string;
   };
 }

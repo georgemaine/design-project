@@ -46,7 +46,7 @@ const InputShimmerAnimation = () => {
         overflow: "hidden",
         position: "absolute",
       }}
-      className="shimmerAnimation"
+      className="animate-inputShimmerTransforms"
     >
       <div
         style={{

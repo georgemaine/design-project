@@ -107,4 +107,18 @@ const AnthropicCompanyLogo = (props: AnthropicCompanyLogoProps) => {
     </svg>
   );
 };
-export { LogoWhiteSvg, LogoBlackSvg, Checkmark, AnthropicCompanyLogo };
+
+const CheckCircle = () => {
+  return (
+    <div className="w-4 h-4 bg-(--theme-color-appTint) flex items-center justify-center rounded-4xl">
+      <Checkmark className="scale-[1.25] w-6 h-6" />
+    </div>
+  );
+};
+export {
+  LogoWhiteSvg,
+  LogoBlackSvg,
+  Checkmark,
+  AnthropicCompanyLogo,
+  CheckCircle,
+};

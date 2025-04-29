@@ -28,7 +28,7 @@ const GalleryItemCard = (props: GalleryItemCardProps) => {
             <img
               src={imageSrc}
               alt={alt}
-              className="aspect-1200/630  object-fill"
+              className="aspect-1200/630  object-fill w-[19.6875rem]"
             />
             <footer className="p-4 w-full">
               <p className="text-lg leading-5">{title}</p>
