@@ -1,5 +1,4 @@
 import { useSpring } from "@react-spring/web";
-import { Computer } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { computeDashOffset } from "./utils";
 

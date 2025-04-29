@@ -1,4 +1,3 @@
-
 import NavigationBar from "@/components/NavigationBar";
 
 const Gallery = () => {

@@ -1,8 +1,6 @@
 "use client";
 import NavigationBar from "@/components/NavigationBar";
 import { GeneratorPreview } from "@/components/Generator/GeneratorPreview";
-import { Checkmark } from "@/components/ui/svgs";
-import { Data } from "@/lib/data";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useEffect } from "react";
 import { shallowEqual } from "react-redux";

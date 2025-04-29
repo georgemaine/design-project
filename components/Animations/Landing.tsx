@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import styles from "./animation.module.css";
 import clsx from "clsx";
-import { getIsTouchDevice } from "@/lib/utils";
-import { useSpring } from "@react-spring/web";
-import { useHasMounted } from "@/lib/hooks";
 
 const LandingBackgroundAnimation = () => {
   return (
